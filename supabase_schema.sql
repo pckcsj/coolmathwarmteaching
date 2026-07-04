@@ -15,14 +15,20 @@ COMMENT ON TABLE public.game_results IS '교육용 웹앱 소인수분해 게임
 
 -- 3. Row Level Security (RLS) 설정 
 -- ⚠️ 중요: RLS가 켜져 있으면 외부(프론트엔드)에서 데이터를 추가하거나 읽을 수 없습니다.
--- 테스트 및 교육용이므로 RLS를 활성화하고 누구나 쓰고 읽을 수 있는 정책(Policy)을 추가하거나, RLS를 완전히 끕니다.
--- 여기서는 가장 쉬운 방법인 RLS 비활성화를 적용합니다. (보안이 중요한 서비스라면 활성화 후 정책을 추가해야 합니다.)
-ALTER TABLE public.game_results DISABLE ROW LEVEL SECURITY;
+-- 교육용 웹앱이므로 로그인 없이 모든 사용자가 점수를 저장(INSERT)하고 순위표를 조회(SELECT)할 수 있는 정책(Policy)을 추가합니다.
 
--- (참고) 만약 RLS를 켜고 public 권한을 주고 싶다면 아래 주석을 풀고 실행하세요.
--- ALTER TABLE public.game_results ENABLE ROW LEVEL SECURITY;
--- CREATE POLICY "Enable read/write access for all users" ON public.game_results
---     FOR ALL
---     TO public
---     USING (true)
---     WITH CHECK (true);
+-- RLS를 명시적으로 활성화합니다.
+ALTER TABLE public.game_results ENABLE ROW LEVEL SECURITY;
+
+-- 1) 누구나 순위 데이터를 조회할 수 있도록 허용 (SELECT)
+CREATE POLICY "Allow public read access" 
+ON public.game_results 
+FOR SELECT 
+USING (true);
+
+-- 2) 누구나 점수를 기록할 수 있도록 허용 (INSERT)
+CREATE POLICY "Allow public insert access" 
+ON public.game_results 
+FOR INSERT 
+WITH CHECK (true);
+
