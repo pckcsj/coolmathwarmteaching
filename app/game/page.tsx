@@ -268,14 +268,18 @@ export default function GamePage() {
               {/* 소수 버튼 리스트 */}
               <div className="w-full">
                 <span className="text-xs text-slate-400 font-bold block mb-3 text-center">
-                  나눌 소수를 탭하세요!
+                  나눌 소수를 탭하세요! (100 이하의 모든 소수)
                 </span>
-                <div className="grid grid-cols-4 gap-3">
-                  {[2, 3, 5, 7, 11, 13, 17, 19].map((prime) => (
+                <div className="grid grid-cols-5 gap-2">
+                  {[
+                    2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 
+                    31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 
+                    73, 79, 83, 89, 97
+                  ].map((prime) => (
                     <button
                       key={prime}
                       onClick={() => handleFactorClick(prime)}
-                      className="h-14 rounded-xl border border-slate-200 bg-white font-bold text-xl hover:bg-slate-50 active:bg-indigo-50 hover:border-indigo-300 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 text-slate-800 dark:text-white transition-all"
+                      className="h-11 rounded-lg border border-slate-200 bg-white font-bold text-sm hover:bg-indigo-50 active:bg-indigo-100 hover:border-indigo-300 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-900 text-slate-800 dark:text-white transition-all shadow-sm flex items-center justify-center cursor-pointer"
                     >
                       {prime}
                     </button>
