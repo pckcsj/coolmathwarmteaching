@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
   // 멘토의 팁 💡: 상태(State)를 이용하면 사용자의 인터랙션에 맞춰 UI를 바꿀 수 있어요!
@@ -27,6 +28,12 @@ export default function Home() {
 
           {/* 네비게이션 링크 공간 (반응형: 모바일에서는 심플하게 표시하거나 숨김) */}
           <nav className="flex items-center gap-4 sm:gap-6">
+            <Link
+              href="/game"
+              className="text-sm font-bold text-indigo-600 transition-colors hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 flex items-center gap-1"
+            >
+              소인수분해 게임 🎮
+            </Link>
             <a
               href="#features"
               className="text-sm font-medium text-slate-600 transition-colors hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400"
@@ -64,13 +71,19 @@ export default function Home() {
               가장 깨끗한 보일러플레이트 코드입니다.
             </p>
 
-            {/* 기능 추가를 위한 가짜(Placeholder) 버튼 */}
-            <div className="mt-10 flex justify-center gap-4">
+            {/* 기능 추가를 위한 가짜(Placeholder) 버튼 & 실제 게임 버튼 */}
+            <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+              <Link
+                href="/game"
+                className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-6 py-3 text-base font-bold text-white shadow-md transition-all hover:bg-indigo-700 hover:shadow-lg dark:bg-indigo-500 dark:hover:bg-indigo-600"
+              >
+                소인수분해 게임 플레이하기 🎮
+              </Link>
               <button
                 onClick={handleButtonClick}
-                className="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-md transition-all hover:bg-indigo-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-indigo-500 dark:hover:bg-indigo-600"
+                className="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-6 py-3 text-base font-semibold text-slate-700 shadow-sm transition-all hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300 dark:hover:bg-slate-900"
               >
-                여기를 눌러서 첫걸음 시작하기
+                새로운 기능 예시 버튼 ⚙️
               </button>
             </div>
           </div>
@@ -81,17 +94,39 @@ export default function Home() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-                💡 앞으로 어떤 것을 만들 수 있을까요?
+                💡 우리 웹앱에서 이용 가능한 기능들
               </h2>
               <p className="mt-4 text-slate-600 dark:text-slate-300">
-                선생님의 창의력을 바탕으로 다양한 수업 도구를 추가해 보세요.
+                작동 중인 실제 게임과 앞으로 자유롭게 추가할 수 있는 교육 도구의 목록입니다.
               </p>
             </div>
 
             <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {/* 카드 1 */}
+              {/* 카드 1 (현재 작동 중!) */}
+              <div className="rounded-xl border border-indigo-200 bg-indigo-50/30 p-6 shadow-sm transition-all hover:shadow-md dark:border-indigo-900/50 dark:bg-indigo-950/20">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-indigo-600 text-white font-bold">
+                  🎮
+                </div>
+                <h3 className="mt-4 text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  소인수분해 게임
+                  <span className="inline-flex items-center rounded-md bg-emerald-50 px-2 py-1 text-xs font-medium text-emerald-700 ring-1 ring-inset ring-emerald-600/20 dark:bg-emerald-950 dark:text-emerald-400">
+                    실제 작동 중!
+                  </span>
+                </h3>
+                <p className="mt-2 text-slate-600 dark:text-slate-400">
+                  화면의 숫자를 소인수 버튼을 눌러 나누어 떨어뜨리며 60초간 높은 점수를 노려보세요! 
+                  점수는 Supabase DB에 저장됩니다.
+                </p>
+                <div className="mt-4">
+                  <Link href="/game" className="text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:underline">
+                    지금 플레이하기 &rarr;
+                  </Link>
+                </div>
+              </div>
+
+              {/* 카드 2 */}
               <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-md dark:border-slate-800 dark:bg-slate-950">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-indigo-100 text-indigo-600 dark:bg-indigo-900/50 dark:text-indigo-400">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-slate-100 text-slate-600 dark:bg-slate-900/50 dark:text-slate-400">
                   📚
                 </div>
                 <h3 className="mt-4 text-lg font-bold text-slate-900 dark:text-white">
@@ -99,27 +134,13 @@ export default function Home() {
                 </h3>
                 <p className="mt-2 text-slate-600 dark:text-slate-400">
                   학생들이 단어와 그림을 매칭하며 스스로 학습할 수 있는 디지털
-                  카드를 만들어 봅니다.
-                </p>
-              </div>
-
-              {/* 카드 2 */}
-              <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-md dark:border-slate-800 dark:bg-slate-950">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-indigo-100 text-indigo-600 dark:bg-indigo-900/50 dark:text-indigo-400">
-                  🎲
-                </div>
-                <h3 className="mt-4 text-lg font-bold text-slate-900 dark:text-white">
-                  실시간 퀴즈 쇼
-                </h3>
-                <p className="mt-2 text-slate-600 dark:text-slate-400">
-                  골든벨 형식의 다지선다 혹은 OX 퀴즈를 구현하여 수업 분위기를
-                  더 활기차게 이끌어 보세요.
+                  카드를 만들어 봅니다. (아이디어 구현 대기 중)
                 </p>
               </div>
 
               {/* 카드 3 */}
               <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:shadow-md dark:border-slate-800 dark:bg-slate-950">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-indigo-100 text-indigo-600 dark:bg-indigo-900/50 dark:text-indigo-400">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-slate-100 text-slate-600 dark:bg-slate-900/50 dark:text-slate-400">
                   🏆
                 </div>
                 <h3 className="mt-4 text-lg font-bold text-slate-900 dark:text-white">
@@ -127,7 +148,7 @@ export default function Home() {
                 </h3>
                 <p className="mt-2 text-slate-600 dark:text-slate-400">
                   게임이나 활동 중 실시간으로 점수를 기록하고 순위를 매기는 인터랙티브
-                  대시보드입니다.
+                  대시보드입니다. (아이디어 구현 대기 중)
                 </p>
               </div>
             </div>
@@ -149,4 +170,5 @@ export default function Home() {
     </div>
   );
 }
+
 
